@@ -1,5 +1,7 @@
 <?php
     require "./Database/db.php";
+    require "validate.php";
+
     $success = $error = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,19 +12,30 @@
         if (empty($name) || empty($email) || empty($password)) {
             $error = "All fields are required!!!";
         } else {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?);";
-            $stmt = $connection -> prepare($sql);
-            $stmt -> bind_param("sss", $name, $email, $hashed_password);
+            $validate = new Validate();
+            $response = $validate -> registration($name, $email, $password);
 
-            if($stmt -> execute()) {
-                $success = "Successfully added the user into Site...";
-                header("Location: login.php");
+            if(strcmp("OK", $response) === 0) {
+                /* Check for duplicate email id */
+                $database = new Database();
+                $check = $database -> check_email($email, "users");
+                if ($check > 0) {
+                    $error = "Email ID already exists!!!";
+                }
+
+                $result = $database -> add_user($name, $email, $password);
+                if($result) {
+                    $success = "Successfully added the user into Site...";
+                    sleep(3);
+                    header("Location: login.php");
+                } else {
+                    $error = "Error in added user into site" . $result;
+                }
+    
+                $stmt -> close();
             } else {
-                $error = "Error in added user into site" . $stmt -> error;
+                $error = $response;
             }
-
-            $stmt -> close();
         }
     }
 ?>
@@ -40,14 +53,17 @@
         <div class="container">
             <h1>Enroll your self into our site</h1>
             <form method="POST">
+                <label for="name">Full Name</label>
                 <input type="text" name="name" placeholder="Full Name">
+                <label for="email">Email</label>
                 <input type="email" name="email" placeholder="Email">
+                <label for="email">Password</label>
                 <input type="password" name="password" placeholder="Password">
                 <button type="submit">Register</button>
                 <p>Already have an account? <a href="login.php">Login</a></p>
             </form>
-            <?php if($error): ?><p class="error"><?= $error ?></p><?php endif; ?>
-            <?php if($success): ?><p class="success"><?= $success ?></p><?php endif;  ?>
+            <?php if($error): ?><p class="error" style="color: red;"><?= $error ?></p><?php endif; ?>
+            <?php if($success): ?><p class="success" style="color: green;"><?= $success ?></p><?php endif;  ?>
         </div>
     </body>
 </html>

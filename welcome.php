@@ -1,9 +1,8 @@
 <?php
     require "./Database/db.php";
     session_start();
-
-    $sql = "SELECT * FROM products";
-    $result = $connection->query($sql);
+    $database = new Database();
+    $result = $database -> get_products();
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +22,9 @@
             <?php else: ?>
                 <li><a href="register.php">Register</a></li>
                 <li><a href="login.php">Login</a></li>
-            <?php endif; ?>
                 <li><a href="./admin/admin_login.php">Admin Login</a></li>
+            <?php endif; ?>
+                
         </ul>
     </nav>
     <h2 style="text-align: center; padding-top: 10px;">Available Products</h2>

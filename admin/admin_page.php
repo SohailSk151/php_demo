@@ -7,8 +7,8 @@
         session_destroy();
         exit();
     } else {
-        $sql = "SELECT * FROM products";
-        $result = $connection->query($sql);
+        $database = new Database();
+        $result = $database -> get_products();
     }
 ?>
 

@@ -14,11 +14,9 @@
             if(empty($name) || empty($description) || empty($price) || empty($image)) {
                 $error = "All fields are required!!!";
             } else {
-                $sql = "INSERT INTO products (name, description, image, price) VALUES (?, ?, ?, ?)";
-                $stmt = $connection ->prepare($sql);
-                $stmt -> bind_param("ssss", $name, $description, $image, $price);
-
-                if($stmt -> execute()) {
+                $database = new Database();
+                $result = $database -> add_products($name, $description, $image, $price);
+                if($result) {
                     $success = "Successfully added the product...";
                     header("Location: admin_page.php");
                 } else {

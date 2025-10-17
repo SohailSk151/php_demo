@@ -1,4 +1,5 @@
 <?php
+    require "validate.php";
     require "./Database/db.php";
     session_start();
     $error = "";
@@ -10,23 +11,22 @@
         if( empty($email) || empty($password) ) {
             $error = "All fields are required!!";
         } else {
-            $sql = "SELECT * FROM users WHERE email = ?;";
-            $stmt = $connection ->prepare($sql);
-            $stmt -> bind_param("s", $email);
-            $stmt -> execute();
-            $result = $stmt -> get_result();
-            $connection = $result -> fetch_assoc();
-
-            if ($connection && password_verify($password, $connection["password"])) {
-                $_SESSION["user_id"] = $connection["id"];
-                $_SESSION["user_name"] = $connection["name"];
-                header("Location: welcome.php");
-                exit();
-            } else {
-                $error = "Invalid Email or Password";
+            $validate = new Validate();
+            $response = $validate -> login($email, $password);
+            
+            if(strcmp($response, "OK") === 0) {
+                $database = new Database();
+                $check_email = $database -> check_email($email, "users");
+                if($check_email > 0) {
+                    $result = $database -> get_user($email, $password);
+                    if(strcmp($result, "OK") === 0) {
+                        $success = "Successfully logged in...";
+                        header("Location: welcome.php");
+                    } else {
+                        $error = "Failed to Login.." . $result;
+                    }
+                }
             }
-
-            $stmt -> close();
         }
     }
 ?>
@@ -46,7 +46,9 @@
     <div class="container">
         <h1>Login Page</h1>
             <form method="POST">
+                <label>Email</label>
                 <input type="email" name="email" placeholder="Email">
+                <label>Password</label>
                 <input type="password" name="password" placeholder="Password">
                 <button type="submit">Login</button>
                 <p>Don't have a account? <a href="register.php">Register</a></p>

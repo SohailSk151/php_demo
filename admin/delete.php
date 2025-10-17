@@ -10,11 +10,10 @@ if (!isset($_SESSION["admin_id"])) {
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
 
-    // Delete product record
-    $delete = $connection->prepare("DELETE FROM products WHERE id=?");
-    $delete->bind_param("i", $id);
+    $database = new Database();
+    $result = $database -> delete_products($id);
 
-    if ($delete->execute()) {
+    if ($result) {
         header("Location: admin_page.php");
         exit();
     } else {

@@ -1,5 +1,6 @@
 <?php
     require "../Database/db.php";
+    require "../validate.php";
     session_start();
     $error = "";
     
@@ -10,23 +11,26 @@
         if(empty($email) || empty($password)) {
             $error = "All fields are requied!!";
         } else {
-            $sql = "SELECT * FROM admin WHERE email = ?;";
-            $stmt = $connection->prepare($sql);
-            $stmt -> bind_param("s", $email);
-            $stmt -> execute();
-            $result = $stmt->get_result();
-            $connection = $result -> fetch_assoc();
+            $validate = new Validate();
+            $response = $validate -> login($email, $password);
             
-            if($connection && password_verify( $password, $connection["password"] )) {
-                $_SESSION["admin_id"] = $connection["id"];
-                $_SESSION["admin_name"] = $connection["name"];
-                echo "Succesfully logged in";
-                header("Location: admin_page.php");
-                exit();
+            if(strcmp($response, "OK" === 0)) {   
+                $database = new Database();
+                $check_email = $database -> check_email($email, "admin");
+                if($check_email > 0) {
+                    $result = $database -> get_admin($email, $password);
+                    if(strcmp($result, "OK") === 0) {
+                        $success = "Successfully logged in...";
+                        header("Location: admin_page.php");
+                    } else {
+                        $error = "Failed to Login.." . $result;
+                    }
+                } else {
+                    $error = "No Mail Found!!";
+                }
             } else {
-                $error = "Email is invalid!!";
+                $error = "Failed to login: " . $response;
             }
-            $stmt ->close();
         }
     }
 ?>

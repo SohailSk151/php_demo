@@ -1,5 +1,6 @@
 <?php
     require "../Database/db.php";
+    require "../validate.php";
     $success = $error = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,23 +11,28 @@
         if (empty($name) || empty($email) || empty($password)) {
             $error = "All fields are required!!!";
         } else {
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO admin (name, email, password) VALUES (?, ?, ?);";
-            $stmt = $connection -> prepare($sql);
-            $stmt -> bind_param("sss", $name, $email, $hashed_password);
+            $validate = new Validate();
+            $response = $validate -> registration($name, $email, $password);
 
-            if($stmt -> execute()) {
-                $success = "Successfully added the user into Site...";
-                if(!isset($_SESSION["admin_id"])) {
-                    header("Location: admin_login.php");
-                } else {
-                    header("Location: admin_page.php");
+            if(strcmp("OK", $response) === 0) {
+                /* Check for duplicate email id */
+                $database = new Database();
+                $check = $database -> check_email($email, "admin");
+                if ($check > 0) {
+                    $error = "Email ID already exists!!!";
                 }
-            } else {
-                $error = "Error in added user into site" . $stmt -> error;
-            }
 
-            $stmt -> close();
+                $result = $database -> add_admin($name, $email, $password);
+                if($result) {
+                    $success = "Successfully added the admin into System...";
+                    sleep(3);
+                    header("Location: admin_page.php");
+                } else {
+                    $error = "Error in adding admin to the system.." . $result;
+                }    
+            } else {
+                $error = $response;
+            }
         }
     }
 ?>

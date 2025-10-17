@@ -1,6 +1,7 @@
 <?php
 require "../Database/db.php";
 session_start();
+$error = "";
 
 if (!isset($_SESSION["admin_id"])) {
     header("Location: admin_login.php");
@@ -9,9 +10,9 @@ if (!isset($_SESSION["admin_id"])) {
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
-    $sql = "SELECT * FROM products WHERE id=$id";
-    $result = $connection->query($sql);
-    $product = $result->fetch_assoc();
+    $database = new Database();
+    $product = $database -> get_product_by($id);
+    //$database -> close();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -19,16 +20,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $price = $_POST['price'];
     $image = $_POST['image'];
-    
-    $update = $connection->prepare("UPDATE products SET name=?, description=?, price=?, image=? WHERE id=?");
-    $update->bind_param("ssssi", $name, $description, $price, $image, $id);
 
-    if ($update->execute()) {
-        header("Location: admin_page.php");
-        exit();
+    if(isset($name) && isset($description) && isset($image) && isset($price)) {
+        
+        $database = new Database();
+        $update = $database -> edit_product($id, $price, $description, $image, $price);
+
+        if ($update) {
+            header("Location: admin_page.php");
+            exit();
+        } else {
+            echo "Error updating record: " . $connection->error;
+        }
     } else {
-        echo "Error updating record: " . $connection->error;
+        $error = "All fields are required!!!";
     }
+    
 }
 ?>
 
