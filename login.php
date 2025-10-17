@@ -21,7 +21,11 @@
                     $result = $database -> get_user($email, $password);
                     if(strcmp($result, "OK") === 0) {
                         $success = "Successfully logged in...";
-                        header("Location: welcome.php");
+                        echo "<script>
+                                alert('✅ Login successful!');
+                                window.location.href = 'welcome.php';
+                            </script>";
+                        exit;
                     } else {
                         $error = "Failed to Login.." . $result;
                     }

@@ -1,5 +1,6 @@
 <?php
     require "../Database/db.php";
+    require "../sendmail.php";
     session_start();
     $success = $error = "";
     if(!isset($_SESSION["admin_id"])) {
@@ -18,7 +19,37 @@
                 $result = $database -> add_products($name, $description, $image, $price);
                 if($result) {
                     $success = "Successfully added the product...";
-                    header("Location: admin_page.php");
+                    $subject = 'New Product Added Successfully'. htmlspecialchars($name) .' – Ecommerce Website';
+                    $message = '
+                                <h2>Product Added Successfully!</h2>
+                                <p>Hello <b>' . htmlspecialchars($adminName) . '</b>,</p>
+                                <p>A new product has been added to the <b>Ecommerce Website Maker</b> inventory.</p>
+
+                                <h4>Product Details:</h4>
+                                <ul>
+                                    <li><b>Name:</b> ' . htmlspecialchars($productName) . '</li>
+                                    <li><b>Description:</b> ' . htmlspecialchars($productDesc) . '</li>
+                                    <li><b>Price:</b> ₹' . htmlspecialchars($productPrice) . '</li>
+                                </ul>
+
+                                <p>You can review or manage this product anytime in the admin panel.</p>
+
+                                <a href="http://localhost/user_auth/admin/admin_page.php"
+                                style="display:inline-block; background-color:#28a745; color:white; 
+                                        text-decoration:none; padding:10px 20px; border-radius:5px;">
+                                View Product List
+                                </a>
+
+                                <br><br>
+                                <p>Best regards,<br><b>Ecommerce Website Maker Team</b></p>
+                            ';
+
+                    send_mail($name, $email, $subject, $message);
+                    echo "<script>
+                            alert('Product added succesfully!');
+                            window.location.href = 'admin_page.php';
+                        </script>";
+                    exit;
                 } else {
                     $error = "Failed to add product" . $stmt -> error;
                 }

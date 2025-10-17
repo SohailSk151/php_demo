@@ -27,8 +27,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $update = $database -> edit_product($id, $price, $description, $image, $price);
 
         if ($update) {
-            header("Location: admin_page.php");
-            exit();
+            $subject = 'Product Updated – ' . htmlspecialchars($name);
+            $message = '
+                <h2>Product Updated Successfully!</h2>
+                <p>Hello <b>' . htmlspecialchars($adminName) . '</b>,</p>
+                <p>The following product has been updated in the system:</p>
+
+                <ul>
+                    <li><b>Name:</b> ' . htmlspecialchars($productName) . '</li>
+                    <li><b>Updated Fields:</b> ' . htmlspecialchars($updatedFields) . '</li>
+                    <li><b>Updated On:</b> ' . date("d M Y, h:i A") . '</li>
+                </ul>
+
+                <p>You can view all product updates in the admin dashboard.</p>
+
+                <a href="http://localhost/admin/admin_page.php"
+                style="display:inline-block; background-color:#ffc107; color:black; 
+                        text-decoration:none; padding:10px 20px; border-radius:5px;">
+                Go to Products
+                </a>
+
+                <br><br>
+                <p>Best regards,<br><b>Ecommerce Website Maker Team</b></p>
+            ';
+            send_mail($name, $email, $subject, $message);
+                
+            echo "<script>
+                    alert('Product Edited succesfully!');
+                    window.location.href = 'admin_page.php';
+                </script>";
+            exit;
         } else {
             echo "Error updating record: " . $connection->error;
         }

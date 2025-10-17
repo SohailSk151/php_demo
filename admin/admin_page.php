@@ -21,14 +21,7 @@
     <link rel="stylesheet" href="../styles/admin_page.css">
 </head>
 <body>
-    <nav>
-        <h1><a href="admin_page.php">Welcome, <?php echo $_SESSION["admin_name"];?></a></h1>
-        <ul>
-            <li><a href="product.php">Add Product</a></li>
-            <li><a href="admin_registration.php">Admin Register</a></li>
-            <li><a href="admin_logout.php">Logout</a></li>
-        </ul>
-    </nav>
+    <?php include '../navbar.php'; ?>
 
     <div class="container">
         <h2>Product List</h2>

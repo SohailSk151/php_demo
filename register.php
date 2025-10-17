@@ -1,6 +1,7 @@
 <?php
     require "./Database/db.php";
     require "validate.php";
+    require "sendmail.php";
 
     $success = $error = "";
 
@@ -26,8 +27,30 @@
                 $result = $database -> add_user($name, $email, $password);
                 if($result) {
                     $success = "Successfully added the user into Site...";
-                    sleep(3);
-                    header("Location: login.php");
+                    $message = '<h2>Welcome to <b>Ecommerce Website</b>!</h2>
+                                <p>Hi <b>' . htmlspecialchars($name) . '</b>,</p>
+                                <p>We’re excited to have you on board. Your registration has been successfully completed.</p>
+                                <p>You can now log in to your account and start exploring tailor-made fashion options designed just for you.</p>
+                                <p>
+                                    <a href="http://localhost/yourproject/login.php" 
+                                    style="display:inline-block; background:#4CAF50; color:white; padding:10px 20px; 
+                                            text-decoration:none; border-radius:5px;">
+                                    Login to Your Account
+                                    </a>
+                                </p>
+                                <p>If you didn’t register for this account, please ignore this email.</p>
+                                <br>
+                                <p>Best regards,<br>
+                                <b>Ecommerse Web Site</b></p>';
+                    send_mail($name, $email, 
+                    "🎉 Welcome to Ecommerce Website – Registration Successful!",
+                    $message);
+
+                    echo "<script>
+                            alert('Registration successful!');
+                            window.location.href = 'login.php';
+                        </script>";
+                    exit;
                 } else {
                     $error = "Error in added user into site" . $result;
                 }

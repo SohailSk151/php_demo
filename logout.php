@@ -3,5 +3,9 @@
     session_unset();
     session_destroy();
     header("Location: welcome.php");
-    exit();
+    echo "<script>
+                alert('Logged out succesfully!');
+                window.location.href = 'login.php';
+        </script>";
+    exit;
 ?>

@@ -14,19 +14,7 @@
     <link rel="stylesheet" href="./styles/welcome.css">
 </head>
 <body>
-    <nav>
-        <h1>Ecommerce Website</a></h1>
-        <ul>
-            <?php if(isset($_SESSION["user_id"])): ?>
-                <li><a href="logout.php">Logout</a></li>
-            <?php else: ?>
-                <li><a href="register.php">Register</a></li>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="./admin/admin_login.php">Admin Login</a></li>
-            <?php endif; ?>
-                
-        </ul>
-    </nav>
+    <?php include 'navbar.php'; ?>
     <h2 style="text-align: center; padding-top: 10px;">Available Products</h2>
     <div class="products-container">
         <div class="products">

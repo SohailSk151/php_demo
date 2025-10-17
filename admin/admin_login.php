@@ -21,7 +21,11 @@
                     $result = $database -> get_admin($email, $password);
                     if(strcmp($result, "OK") === 0) {
                         $success = "Successfully logged in...";
-                        header("Location: admin_page.php");
+                        echo "<script>
+                                alert('Login successful!');
+                                window.location.href = 'admin_page.php';
+                            </script>";
+                        exit;
                     } else {
                         $error = "Failed to Login.." . $result;
                     }

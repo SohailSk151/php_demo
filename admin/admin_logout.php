@@ -3,5 +3,9 @@
     session_unset();
     session_destroy();
     header("Location: admin_page.php");
-    exit();
+    echo "<script>
+            alert('Loged Out succesfully!');
+            window.location.href = 'admin_login.php';
+        </script>";
+    exit;
 ?>
