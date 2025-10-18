@@ -1,11 +1,11 @@
 <?php
-require "../Database/db.php";
-require "../sendmail.php";
+require "../../models/db.php";
+require "../../sendmail.php";
 session_start();
 
 // Admin check
 if (!isset($_SESSION["admin_id"])) {
-    header("Location: admin_login.php");
+    header("Location: ../auth/admin_login.php");
     exit();
 }
 

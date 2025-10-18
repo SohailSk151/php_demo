@@ -1,7 +1,7 @@
 <?php
-    require "../Database/db.php";
-    require "../validate.php";
-    require "../sendmail.php";
+    require "../../models/db.php";
+    require "../../models/validate.php";
+    require "../../models/sendmail.php";
     $success = $error = "";
 
     if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -55,7 +55,7 @@
                     send_mail($name, $email, "Admin Registration Successful – Ecommerce Website", $message);
                     echo "<script>
                             alert('Registration successful!');
-                            window.location.href = 'admin_login.php';
+                            window.location.href = '../admin/admin_login.php';
                         </script>";
                     exit;
                 } else {
@@ -72,7 +72,7 @@
 <html>
     <head>
         <title>Admin Registration Page</title>
-        <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../../public/styles/style.css">
     </head>
     <body>
         <nav>

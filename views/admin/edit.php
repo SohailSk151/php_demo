@@ -1,12 +1,12 @@
 <?php
-require "../Database/db.php";
-require "../sendmail.php";
+require "../../models/db.php";
+require "../../sendmail.php";
 session_start();
 
 $error = "";
 
 if (!isset($_SESSION["admin_id"])) {
-    header("Location: admin_login.php");
+    header("Location: ../auth/admin_login.php");
     exit();
 }
 
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = $_POST["price"];
 
     // --- File Upload Handling ---
-    $target_dir = "../public/uploads/productImages";
+    $target_dir = "../../public/uploads/productImages/";
     if (!is_dir($target_dir)) {
         mkdir($target_dir, 0777, true);
     }
@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="en">
 <head>
     <title>Edit Product</title>
-    <link rel="stylesheet" href="../styles/product.css">
+    <link rel="stylesheet" href="../../public/styles/product.css">
 </head>
 <body>
     <nav>

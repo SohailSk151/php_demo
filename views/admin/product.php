@@ -1,6 +1,6 @@
 <?php
-require "../Database/db.php";
-require "../sendmail.php";
+require "../../models/db.php";
+require "../../sendmail.php";
 session_start();
 
 $success = $error = "";
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $price = $_POST["price"];
 
     // --- File Upload Handling ---
-    $target_dir = "../public/uploads/productImages/";
+    $target_dir = "../../public/uploads/productImages/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -131,7 +131,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Product</title>
-    <link rel="stylesheet" href="../styles/product.css">
+    <link rel="stylesheet" href="../../public/styles/product.css">
 </head>
 <body>
     <nav>

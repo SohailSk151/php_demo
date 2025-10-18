@@ -1,5 +1,5 @@
 <?php
-require "../Database/db.php";
+require "../../models/db.php";
 session_start();
 
 $database = new Database();
@@ -12,10 +12,10 @@ $result = $database->get_products();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Commerce</title>
-    <link rel="stylesheet" href="../styles/welcome.css">
+    <link rel="stylesheet" href="../../public/styles/welcome.css">
 </head>
 <body>
-    <?php include '../navbar.php'; ?>
+    <?php include '../partials/navbar.php'; ?>
 
     <?php if (isset($_SESSION['user_name'])): ?>
         <h1>Welcome <?php echo htmlspecialchars($_SESSION['user_name']); ?></h1>

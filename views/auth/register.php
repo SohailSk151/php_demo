@@ -1,7 +1,7 @@
 <?php
-    require "./Database/db.php";
-    require "validate.php";
-    require "sendmail.php";
+    require "../../models/db.php";
+    require "../../models/validate.php";
+    require "../../models/sendmail.php";
 
     $success = $error = "";
 
@@ -67,11 +67,11 @@
 <html>
     <head>
         <title>Registration Page</title>
-        <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="../../public/styles/style.css">
     </head>
     <body>
         <nav>
-            <h1><a href="welcome.php">Ecommerce Website</a></h1>
+            <h1><a href="../pages/welcome.php">Ecommerce Website</a></h1>
         </nav>
         <div class="container">
             <h1>Enroll your self into our site</h1>
