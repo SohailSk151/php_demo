@@ -25,6 +25,11 @@ nav h1 {
     font-size: 24px;
 }
 
+nav a {
+    color: black;
+    text-decoration: none;
+}
+
 nav ul {
     list-style: none;
     display: flex;

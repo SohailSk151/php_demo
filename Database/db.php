@@ -51,6 +51,12 @@
             }
         }
 
+        function get_all_users() {
+            $sql = "SELECT name, email FROM users"; 
+            $result = $this -> connection->query($sql);
+            return $result;
+        }
+
         function get_admin($email, $password) {
             $sql = "SELECT * FROM admin WHERE email = ?;";
             $stmt = $this -> connection->prepare($sql);

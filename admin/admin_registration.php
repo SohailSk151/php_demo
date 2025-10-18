@@ -63,7 +63,7 @@
                 }    
             } else {
                 $error = $response;
-            }
+            } 
         }
     }
 ?>
@@ -79,7 +79,7 @@
             <h1><a href="admin_page.php">Ecommerce Website</a></h1>
         </nav>
         <div class="container">
-            <h1 style="padding-bottom: 10px">Enroll a new Admin</h1>
+            <h1 style="text-align: center; padding-bottom: 10px">Enroll a new Admin</h1>
             <form method="POST">
                 <input type="text" name="name" placeholder="Full Name">
                 <input type="email" name="email" placeholder="Email">

@@ -4,9 +4,9 @@ use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
 
-$mail = new PHPMailer(true);
 
 function send_mail($name, $email, $subject, $message) {    
+    $mail = new PHPMailer(true);
     try {
         // Server settings
         $mail->isSMTP();

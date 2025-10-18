@@ -30,6 +30,8 @@
                         $error = "Failed to Login.." . $result;
                     }
                 }
+            } else {
+                $error = $response;
             }
         }
     }
@@ -48,7 +50,7 @@
         <h1><a href="welcome.php">Ecommerce Website</a></h1>
     </nav>
     <div class="container">
-        <h1>Login Page</h1>
+        <h1 style="text-align: center;">Login Page</h1>
             <form method="POST">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email">

@@ -50,10 +50,10 @@
 </head>
 <body>
     <nav>
-        <h1><a href="../welcome.php">Ecommerce Website</a></h1>
+        <h1 ><a href="../welcome.php">Ecommerce Website</a></h1>
     </nav>
     <div class="container">
-        <h1>Admin Login Page</h1>
+        <h1 style="text-align: center;">Admin Login Page</h1>
             <form method="POST">
                 <input type="email" name="email" placeholder="Email">
                 <input type="password" name="password" placeholder="Password">

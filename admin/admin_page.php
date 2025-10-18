@@ -1,15 +1,16 @@
 <?php
-    require "../Database/db.php";
-    session_start();
-    $error = "";
-    if(!isset($_SESSION["admin_id"])){
-        header("Location: admin_login.php");
-        session_destroy();
-        exit();
-    } else {
-        $database = new Database();
-        $result = $database -> get_products();
-    }
+require "../Database/db.php";
+session_start();
+$error = "";
+
+if(!isset($_SESSION["admin_id"])){
+    session_destroy();
+    header("Location: admin_login.php");
+    exit();
+} else {
+    $database = new Database();
+    $result = $database->get_products();
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,15 +39,23 @@
             </thead>
             <tbody>
                 <?php
-                if ($result->num_rows > 0) {
+                if ($result && $result->num_rows > 0) {
                     $i = 1;
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>" . $i++ . "</td>";
                         echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['price']) . "</td>";
-                        echo "<td><img src='" . htmlspecialchars($row['image']) . "' alt='Product Image' width='80'></td>";
+                        echo "<td>₹" . htmlspecialchars($row['price']) . "</td>";
+
+                        // Display uploaded image
+                        $imgPath = htmlspecialchars($row['image']);
+                        if(file_exists($imgPath)) {
+                            echo "<td><img src='" . $imgPath . "' alt='Product Image' width='80'></td>";
+                        } else {
+                            echo "<td>No image</td>";
+                        }
+
                         echo "<td><a href='edit.php?id=" . $row['id'] . "'>Edit</a></td>";
                         echo "<td><a href='delete.php?id=" . $row['id'] . "' onclick=\"return confirm('Are you sure you want to delete this product?');\">Delete</a></td>";
                         echo "</tr>";
