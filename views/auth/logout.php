@@ -4,7 +4,7 @@
     session_destroy();
     echo "<script>
                 alert('Logged out succesfully!');
-                window.location.href = '../pages/welcome.php';
+                window.location.href = '../user/welcome.php';
         </script>";
     exit;
 ?>

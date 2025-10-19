@@ -23,7 +23,7 @@
                         $success = "Successfully logged in...";
                         echo "<script>
                                 alert('✅ Login successful!');
-                                window.location.href = '../pages/welcome.php';
+                                window.location.href = '../user/welcome.php';
                             </script>";
                         exit;
                     } else {

@@ -14,7 +14,7 @@
             <li><a href="../auth/admin_logout.php">Logout</a></li>
 
         <?php else: ?>
-            <li><a href="../pages/welcome.php">Home</a></li>
+            <li><a href="../user/welcome.php">Home</a></li>
             <li><a href="../auth/login.php">Login</a></li>
             <li><a href="../auth/register.php">Register</a></li>
             <li><a href="../auth/admin_login.php">Admin Login</a></li>

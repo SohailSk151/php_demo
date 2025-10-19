@@ -22,7 +22,6 @@ $result = $database->get_products();
     <?php endif; ?>
 
     <h2 style="text-align: center; padding-top: 10px;">Available Products</h2>
-    <div class="products-container">
         <div class="products">
             <?php
             if ($result && $result->num_rows > 0) {
@@ -48,6 +47,5 @@ $result = $database->get_products();
             }
             ?>
         </div>
-    </div>
 </body>
 </html>

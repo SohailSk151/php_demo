@@ -21,13 +21,16 @@ if (isset($_GET['id'])) {
         exit();
     }
 
+
+
     // Delete product from DB
     $result = $database->delete_products($id);
 
-    // Delete image file from uploads folder
+     // Delete image file from uploads folder
     if ($result && file_exists($product['image'])) {
         unlink($product['image']);
     }
+   
 
     if ($result) {
         // Send notification email to all users
