@@ -11,7 +11,7 @@ nav {
     height: 80px;
     background-color: aquamarine;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 

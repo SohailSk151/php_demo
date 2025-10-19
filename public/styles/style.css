@@ -12,7 +12,7 @@ nav {
     height: 80px;
     background-color: aquamarine;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -26,7 +26,7 @@ nav a {
 }
 
 nav ul {
-    list-style: none;
+    list-style:none;
     display: flex;
     gap: 20px;
 }
@@ -77,4 +77,8 @@ form > button {
     cursor: pointer;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+ol {
+    padding-left: 25px;
 }

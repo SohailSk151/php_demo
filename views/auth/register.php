@@ -1,7 +1,7 @@
 <?php
     require "../../models/db.php";
     require "../../models/validate.php";
-    require "../../models/sendmail.php";
+    require "../../sendmail.php";
 
     $success = $error = "";
 
@@ -70,9 +70,7 @@
         <link rel="stylesheet" href="../../public/styles/style.css">
     </head>
     <body>
-        <nav>
-            <h1><a href="../pages/welcome.php">Ecommerce Website</a></h1>
-        </nav>
+        <?php include '../partials/navbar.php'; ?>
         <div class="container">
             <h1>Enroll your self into our site</h1>
             <form method="POST">
@@ -82,6 +80,13 @@
                 <input type="email" name="email" placeholder="Email">
                 <label for="email">Password</label>
                 <input type="password" name="password" placeholder="Password">
+                <ol>
+                    <li>Has at least one lowercase letter</li>
+                    <li>Has at least one uppercase letter</li>
+                    <li>Has at least one digit</li>
+                    <li>Has at least one special character (from the given list)</li>
+                    <li>Has a minimum length of 8 characters</li>
+                </ol>
                 <button type="submit">Register</button>
                 <p>Already have an account? <a href="login.php">Login</a></p>
             </form>

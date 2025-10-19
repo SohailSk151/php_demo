@@ -71,7 +71,7 @@
                 return "OK";
             } else {
                 $stmt -> close();
-                return "Email is invalid!!";
+                return "Password is invalid!!";
             }
         }
 

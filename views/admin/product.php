@@ -134,9 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../../public/styles/product.css">
 </head>
 <body>
-    <nav>
-        <h1><a href="admin_page.php">Ecommerce Website</a></h1>
-    </nav>
+    <?php include '../partials/navbar.php'; ?>
     <div class="container">
         <h1 style="text-align: center;">Add Products</h1>
         <form method="POST" enctype="multipart/form-data">

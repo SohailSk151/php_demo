@@ -46,9 +46,7 @@
     <link rel="stylesheet" href="../../public/styles/style.css">
 </head>
 <body>
-    <nav>
-        <h1><a href="../pages/welcome.php">Ecommerce Website</a></h1>
-    </nav>
+    <?php include '../partials/navbar.php'; ?>
     <div class="container">
         <h1 style="text-align: center;">Login Page</h1>
             <form method="POST">
@@ -56,6 +54,13 @@
                 <input type="email" name="email" placeholder="Email">
                 <label>Password</label>
                 <input type="password" name="password" placeholder="Password">
+                <ol>
+                    <li>Has at least one lowercase letter</li>
+                    <li>Has at least one uppercase letter</li>
+                    <li>Has at least one digit</li>
+                    <li>Has at least one special character (from the given list)</li>
+                    <li>Has a minimum length of 8 characters</li>
+                </ol>
                 <button type="submit">Login</button>
                 <p>Don't have a account? <a href="register.php">Register</a></p>
             </form>
