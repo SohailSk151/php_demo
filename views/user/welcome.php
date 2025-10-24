@@ -12,8 +12,8 @@ $result = $database->get_products();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Commerce</title>
-    <link rel="stylesheet" href="../../public/styles/welcome.css">
-</head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    </head>
 <body>
     <?php include '../partials/navbar.php'; ?>
 
@@ -22,7 +22,7 @@ $result = $database->get_products();
     <?php endif; ?>
 
     <h2 style="text-align: center; padding-top: 10px;">Available Products</h2>
-        <div class="products">
+    <div class="products">
             <?php
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
@@ -38,7 +38,7 @@ $result = $database->get_products();
 
                     echo "<h3>" . htmlspecialchars($row['name']) . "</h3>";
                     echo "<p>" . htmlspecialchars($row['description']) . "</p>";
-                    echo "<p class='price'>₹" . htmlspecialchars($row['price']) . "</p>";
+                    echo "<p class='price'>" . htmlspecialchars($row['price']) . "</p>";
                     echo "<button type='button' class='btn'>Buy Now</button>";
                     echo "</div>";
                 }
@@ -47,5 +47,6 @@ $result = $database->get_products();
             }
             ?>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@ table {
 th, td {
     border: 1px solid black;
     padding: 12px;
-    text-align: left;
+    text-align: center;
 }
 
 nav {

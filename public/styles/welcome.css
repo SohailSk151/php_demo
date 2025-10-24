@@ -42,16 +42,6 @@ nav ul li a {
     font-weight: bold;
 }
 
-/* Products container */
-.products-container {
-    padding: 40px 20px;
-    text-align: center;
-}
-
-.products-container h2 {
-    margin-bottom: 30px;
-    font-size: 28px;
-}
 
 /* Products grid */
 .products {

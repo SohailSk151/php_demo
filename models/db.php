@@ -8,7 +8,12 @@
         private $connection;
 
         public function __construct() {
-            $this -> connection = mysqli_connect($this -> host, $this -> user, $this -> password, $this -> DBName);
+            $this -> connection = mysqli_connect(
+                $this -> host, 
+                $this -> user, 
+                $this -> password, 
+                $this -> DBName
+            );
         }
 
         function check_email($email, $mode) {

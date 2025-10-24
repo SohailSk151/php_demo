@@ -73,13 +73,14 @@
 <html>
     <head>
         <title>Admin Registration Page</title>
-        <link rel="stylesheet" href="../../public/styles/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
     <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
         <?php include '../partials/navbar.php'; ?>
-        <div class="container">
-            <h1 style="text-align: center; padding-bottom: 10px">Enroll a new Admin</h1>
-            <form method="POST">
+        <div class="container w-25 p-3 border shadow-3 rounded-3" style="width: 30%;">
+            <h1 class="text-center dispaly-3">Enroll a new Admin</h1>
+            <form method="POST" class="d-flex flex-column gap-2 container" style="width: 85%;">
                 <label>Full Name</label>
                 <input type="text" name="name" placeholder="Full Name">
                 <label>Email</label>
@@ -93,7 +94,7 @@
                     <li>Has at least one special character (from the given list)</li>
                     <li>Has a minimum length of 8 characters</li>
                 </ol>
-                <button type="submit">Register</button>
+                <button type="submit" class="btn btn-success">Register</button>
             </form>
             <?php if($error): ?><p class="error"><?= $error ?></p><?php endif; ?>
             <?php if($success): ?><p class="success"><?= $success ?></p><?php endif;  ?>
