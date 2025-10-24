@@ -134,9 +134,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <?php include '../partials/navbar.php'; ?>
-    <div class="container">
-        <h1 style="text-align: center;">Add Products</h1>
-        <form method="POST" enctype="multipart/form-data">
+    <div class="container border rounded-3 shadow-3 p-2" style="width: 30%;">
+        <h1 class="text-center">Add Products</h1>
+        <form method="POST" class="d-flex container flex-column w-75 gap-2" enctype="multipart/form-data">
             <label for="name">Name</label>
             <input type="text" name="name" placeholder="Enter the product name">
             <label for="description">Description</label>
@@ -145,7 +145,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="file" name="fileToUpload" id="fileToUpload">
             <label for="price">Price</label>
             <input type="text" name="price" placeholder="Enter the price..">
-            <button type="Submit" class="btn">Submit</button>
+            <button type="Submit" class="btn btn-success">Submit</button>
         </form>
          <?php if($error): ?><p class="error"><?= $error ?></p><?php endif; ?>
         <?php if($success): ?><p class="success"><?= $success ?></p><?php endif;  ?>

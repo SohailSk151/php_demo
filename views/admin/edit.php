@@ -135,9 +135,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <?php include '../partials/navbar.php'; ?>
-    <div class="container">
-        <h2>Edit Product</h2>
-        <form method="POST" enctype="multipart/form-data">
+    <div class="container border rounded-3 shadow-3 p-2" style="width: 30%;">
+        <h2 class="text-center">Edit Product</h2>
+        <form method="POST" class="d-flex container flex-column w-75 gap-2" style="width:85%;"  enctype="multipart/form-data">
             <label for="name">Name</label>
             <input type="text" name="name" value="<?php echo htmlspecialchars($product['name']); ?>">
 
@@ -152,8 +152,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <p>Current Image: <img src="<?php echo htmlspecialchars($product['image']); ?>" width="100"></p>
 
             <span>
-                <button type="submit" class="btn">Update</button>
-                <button><a href="admin_page.php">Cancel</a></button>
+                <button type="submit" class="btn btn-success">Update</button>
+                <button><a href="admin_page.php" class="btn btn-danger border-0" role="submit">Cancel</a></button>
             </span>
         </form>
 

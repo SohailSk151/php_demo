@@ -22,31 +22,38 @@ $result = $database->get_products();
     <?php endif; ?>
 
     <h2 style="text-align: center; padding-top: 10px;">Available Products</h2>
-    <div class="products">
+    <div class="container">
+        <div class="row">
             <?php
             if ($result && $result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo "<div class='product-card'>";
+                    echo "<div class='col-12 col-sm-6 col-md-4 col-lg-3 mb-4'>";
+                    echo "<div class='card h-100 shadow-sm'>"; // Full height + subtle shadow
 
-                    // Display product image from uploads folder
                     $imgPath = htmlspecialchars($row['image']);
                     if (file_exists($imgPath)) {
-                        echo "<figure><img src='" . $imgPath . "' alt='Product Image' style='width: 250px; height: 250px;'></figure>";
+                        echo "<img class='card-img-top' src='" . $imgPath . "' alt='Product Image' style='object-fit:cover; height:250px;'>";
                     } else {
-                        echo "<figure><p>No Image</p></figure>";
+                        echo "<div class='d-flex align-items-center justify-content-center bg-light' style='height:250px;'>No Image</div>";
                     }
 
-                    echo "<h3>" . htmlspecialchars($row['name']) . "</h3>";
-                    echo "<p>" . htmlspecialchars($row['description']) . "</p>";
-                    echo "<p class='price'>" . htmlspecialchars($row['price']) . "</p>";
-                    echo "<button type='button' class='btn'>Buy Now</button>";
+                    echo "<div class='card-body d-flex flex-column'>";
+                        echo "<h5 class='card-title'>" . htmlspecialchars($row['name']) . "</h5>";
+                        echo "<p class='card-text flex-grow-1'>" . htmlspecialchars($row['description']) . "</p>";
+                        echo "<p class='card-text fw-bold'>" . htmlspecialchars($row['price']) . "</p>";
+                        echo "<a href='#' class='btn btn-info mt-auto'>Buy Now</a>"; // mt-auto pushes button to bottom
                     echo "</div>";
+
+                    echo "</div>"; // card
+                    echo "</div>"; 
                 }
             } else {
                 echo "<p class='no-products'>No products found.</p>";
             }
             ?>
-        </div>
+        </div> 
+    </div> 
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
